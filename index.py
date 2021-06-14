@@ -1,40 +1,70 @@
-
-parkingSpaces = []
-currentTicket = {}
+from IPython.display import clear_output
 
 class parkingGarage():
-  ticket = ["1", "2", "3", "4", "5", "6", "7". "8", "9", "10"]
-  def __init__(self, parking_space, tickets, parking_status)
-    self.parking_space = parking_space
-    self.tickets = tickets
-    self.parking_status
-
-#general greeting
-    
-def Garage(self):
-  print("Welcome to Parking Garage! Please take available ticket.")
-      print(garage)
- 
-#take ticket
-      
- def takeTicket(ticket):
-  clear_output()
-      for i in range(10):
-        ticket.append(i)
-  print(ticket)
+    def __init__(self,tickets):
+        self.tickets = tickets
+        self.availableTickets = [1,2,3,4,5,6,7,8,9,10]
+        self.takenSpots = []
         
-def parkingStatus(self)
-  clear_output()
-    if self.parkingStatus == []:
-      print("There are no available parking spaces at this time.")
-    else 
+    # Take Ticket 
     
-#pay for parking and exit
-    
-def payForParking(self)
-  clear_output()
-      if ticket in parking_status:
-        self.parking_status[ticket]= "You have 15 min to exit parking garage. Have a nice day!" + + str(self.parkingStatus)
-          break
+    def takeTicket(self):
+        clear_output()
+        if self.availableTickets == []:
+            print("Sorry. The Garage is full. Please try back later!")
+        else:
+            ticketTaken = self.availableTickets.pop()
+            self.takenSpots.append(ticketTaken)
+            print('Please take ticket ' + str(self.takenSpots) + " and park in spot " + str(self.takenSpots) + ".")
+            print("Garage Spots Remaining: " + str(self.availableTickets))
         
-print(parkingGarage)
+        
+    # Pay for Parking
+    
+    def payForParking(self):
+        clear_output()
+        ticketPaid = self.takenSpots.pop()
+        self.availableTickets.append(ticketPaid)
+        ticketTaken = self.availableTickets.pop()
+        self.takenSpots.append(ticketTaken)
+        print("Your spot/ticket number is " + str(ticketTaken))
+        input("Press any button to pay...")
+        print("Thank You, have a nice day! You have 15 minutes to leave the garage.")
+        print("Garage Spots Remaining: " + str(self.availableTickets))
+                
+    # Leave Garage
+    
+    def leaveGarage(self):
+        response3 = input("Has your ticket been paid? ")
+        if response3.lower() == 'yes':
+            print("Thank You, have a nice day!")
+        else:
+            self.payForParking()
+        ticketPaid = self.takenSpots.pop()
+        self.availableTickets.append(ticketPaid)
+        print("Garage Spots Remaining: " + str(self.availableTickets))
+            
+        
+    # METHODS END HERE
+    
+    # FUNCTION STARTS HERE
+        
+def run():
+    clear_output()
+    pg1 = parkingGarage([])
+    while True:
+        response2 = input("Welcome to The Parking Center! Would you like to Pay, Park or Leave? Type 'Quit' to shut system down. ")
+            
+        if response2.lower() == 'park':
+            pg1.takeTicket()
+            
+        if response2.lower() == 'pay':
+            pg1.payForParking()
+            
+        if response2.lower() == 'leave':
+            pg1.leaveGarage()
+            
+        if response2.lower() == 'quit':
+            break   
+            
+run()
